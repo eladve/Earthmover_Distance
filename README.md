@@ -1,5 +1,11 @@
 # Earthmover_Distance
-A nice little function computing earthmover distance between multidimensional point sets efficiently, using network flow algorithms
+The file EMD.py implements a nice little function computing earthmover distance (EMD) between two multidimensional point sets efficiently, using network flow algorithms. This is the right way to compute EMD between two sets of points -- a lot of libraries implement it very inefficiently.
+
+Sample use: `resulting_flow, EMD_value = compute_optimal_transport(S, T)`
+ 
+Then `EMD_value` will be the EMD between the two point-sets (i.e. between the two distributions that are uniform on those point-sets). And `resulting_flow` is the actual optimal flow. The sets `S` and `T` need to be lists of numpy vectors. Each list should consist of unique vectors. If you want to include a vector more than once, use the optional weight parameter.
+
+**More info:**
 
 This function computes the  earthmover distance (EMD) between two high-dimensional pointsets, which we will call Source (S) and Target (T). (But recall the EMD is symmetric so those names are just for convenience.)
 
