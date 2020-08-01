@@ -16,8 +16,11 @@ def compute_optimal_transport(S, T, underlying_distance = ell2, S_weights = None
     Idea for making this more efficient: instead of applying the underlying_distance function to each pair by itself, run something like scipy.spatial.distance.pdist to compute them all at the same time. Might be more efficient.
     """
     dim = len(S[0])
-    for v in S: assert len(v) == dim
-    for u in T: assert len(u) == dim
+    for v in S: assert len(v) == dim, "the input vectors are of varying sizes"
+    for u in T: assert len(u) == dim, "the input vectors are of varying sizes"
+    # assert that the input vectors are unique
+    assert len(set(map(tuple, S))) == len(S), "a vector appears in S more than once. Please use the S_weights parameter instead "
+    assert len(set(map(tuple, T))) == len(T), "a vector appears in T more than once. Please use the T_weights parameter instead "
     
     if S_weights is None:
         S_weights = [1.0] * len(S)
